@@ -140,6 +140,7 @@ export default {
           try {
             if (res.status == 202) {
               this.$moshaToast({ title: 'Sucesso', description: 'Login realizado com sucesso'}, {type: 'success', transition: 'slide'})
+              console.log(res.data)
             } 
           } catch {}          
         });        

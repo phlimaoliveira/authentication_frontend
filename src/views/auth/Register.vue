@@ -5,33 +5,8 @@
         <div
           class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0"
         >
-          <div class="rounded-t mb-0 px-6 py-6">
-            <div class="text-center mb-3">
-              <h6 class="text-blueGray-500 text-sm font-bold">
-                Entre com sua Conta
-              </h6>
-            </div>
-            <div class="btn-wrapper text-center">
-              <button
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                type="button"
-              >
-                <img alt="..." class="w-5 mr-1" :src="github" />
-                Github
-              </button>
-              <button
-                class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                type="button"
-              >
-                <img alt="..." class="w-5 mr-1" :src="google" />
-                Google
-              </button>
-            </div>
-            <hr class="mt-6 border-b-1 border-blueGray-300" />
-          </div>
-          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <div class="text-blueGray-400 text-center mb-3 font-bold">
-              <small>ou Faça Login com suas Credenciais</small>
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0" style="margin-top: 30px">
+            <div class="text-blueGray-400 text-center mb-3 font-bold">              
             </div>
             <form>
               <div class="relative w-full mb-3">
@@ -161,16 +136,11 @@
   </div>
 </template>
 <script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
 import '@/assets/styles/tailwind.css';
-import axios from "axios";
 
 export default {
   data() {
-    return {
-      github,
-      google,
+    return {      
       name: '',
       email: '',
       emailExists: false,
@@ -182,7 +152,7 @@ export default {
   methods: {
     async register() {      
       if(this.policyPrivacy == true && this.emailExists == false && this.password.length >= 8) {
-          const res = await axios({
+          const res = await this.$http({
               url: process.env.VUE_APP_BACKEND_URL + "/register",
               method: "POST",
               data: {
@@ -198,8 +168,7 @@ export default {
             }).then(res => {            
               if (res.status == 201) {               
                 this.$moshaToast({ title: 'Registrado', description: 'Parabéns, a sua conta foi criada com sucesso...'}, {type: 'success', transition: 'slide'})
-                
-                // location.href = "/" - Enviar uma variavel booleana via props para aparecer o toast acima na tela de login
+                this.$router.push({ name: 'login' })                
               }
             });                          
       } else {
@@ -214,7 +183,7 @@ export default {
     },
     // Verify if e-mail exists on database API
     async verifyEmail() {      
-      const res = await axios({
+      const res = await this.$http({
           url: process.env.VUE_APP_BACKEND_URL + "/verify_email_user/"+this.email,
           method: "GET"          
         }).catch((err) => {

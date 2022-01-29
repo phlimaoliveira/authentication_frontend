@@ -31,5 +31,10 @@ export default {
     CardPageVisits,
     CardSocialTraffic,
   },
+  mounted() {
+    if(!localStorage.getItem('access_token')) {
+      this.$router.push({ name: 'login' })
+    }
+  }
 };
 </script>

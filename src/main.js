@@ -34,10 +34,14 @@ import Landing from "@/views/Landing.vue";
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
 
+// Import HTTP for requests with axios
+import http from '@/http'
+
 // routes
 
 const routes = [
   {
+    name: "admin",
     path: "/admin",
     redirect: "/admin/dashboard",
     component: Admin,
@@ -65,6 +69,7 @@ const routes = [
     component: Auth,
     children: [
       {
+        name: 'login',
         path: "/login",
         component: Login,
       },
@@ -95,5 +100,6 @@ const router = createRouter({
 });
 
 const app = createApp(App).use(router);
+app.config.globalProperties.$http = http
 app.use(moshaToast)
 app.mount("#app")

@@ -42,14 +42,15 @@
         href="javascript:void(0);"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Something else here
+        Configure Actions
       </a>
       <div class="h-0 my-2 border border-solid border-blueGray-100" />
       <a
-        href="javascript:void(0);"
+        href="#"
+        v-on:click="logout"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Seprated link
+        Logout
       </a>
     </div>
   </div>
@@ -79,6 +80,15 @@ export default {
         });
       }
     },
+    logout() {
+      localStorage.removeItem('access_token')
+      this.$router.push({ name: 'login' })
+    }
   },
-};
+  mounted() {    
+    this.$http.get('dashboard')
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error))
+  }
+ };
 </script>

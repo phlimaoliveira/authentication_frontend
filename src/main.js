@@ -27,6 +27,8 @@ import Maps from "@/views/admin/Maps.vue";
 
 import Login from "@/views/auth/Login.vue";
 import Register from "@/views/auth/Register.vue";
+import ForgotPassword from "@/views/auth/ForgotPassword.vue";
+import ResetPassword from "@/views/auth/ResetPassword.vue";
 
 // views without layouts
 
@@ -77,6 +79,16 @@ const routes = [
         path: "/register",
         component: Register,
       },
+      {
+        name: 'forgot',
+        path: "/forgot",
+        component: ForgotPassword
+      },
+      {
+        name: 'reset_password',
+        path: "/reset_password/:reset_token",
+        component: ResetPassword
+      }
     ],
   },
   {

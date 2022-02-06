@@ -32,9 +32,18 @@ export default {
     CardSocialTraffic,
   },
   mounted() {
+    // Verify with exist access token and with this access token is valid
     if(!localStorage.getItem('access_token')) {
       this.$router.push({ name: 'login' })
-    }
+    } else {
+      this.$http.get('dashboard')        
+        .catch((error) => {           
+          if(error.response.status == 401 || error.response.status == 422) {
+            localStorage.removeItem('access_token')
+            this.$router.push({ name: 'login' })
+          }          
+        })
+    }    
   }
 };
 </script>

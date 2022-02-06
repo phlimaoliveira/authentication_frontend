@@ -81,14 +81,11 @@ export default {
       }
     },
     logout() {
-      localStorage.removeItem('access_token')
+      const token = { headers: { Authorization: `Bearer `+localStorage.getItem('access_token') } };
+      this.$http.delete('logout', token);
+      localStorage.removeItem('access_token')      
       this.$router.push({ name: 'login' })
     }
-  },
-  mounted() {    
-    this.$http.get('dashboard')
-    .then(response => console.log(response.data))
-    .catch(error => console.log(error))
   }
  };
 </script>

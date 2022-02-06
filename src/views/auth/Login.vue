@@ -12,6 +12,7 @@
             <form>
               <div class="relative w-full mb-3">
                 <label
+                  id="email"
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="grid-password"
                 >
@@ -56,7 +57,7 @@
         </div>
         <div class="flex flex-wrap mt-6 relative">
           <div class="w-1/2">
-            <a href="javascript:void(0)" class="text-blueGray-200">
+            <a href="/forgot" class="text-blueGray-200">
               <small>Esqueceu a Senha?</small>
             </a>
           </div>
